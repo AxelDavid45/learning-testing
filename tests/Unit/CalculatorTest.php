@@ -15,6 +15,7 @@ class CalculatorTest extends TestCase
 
     public function test_asserts()
     {
+        $this->assertTrue(true);
         //Verify if the class contains an attribute
         $this->assertClassHasAttribute('operator', Calculator::class);
 
