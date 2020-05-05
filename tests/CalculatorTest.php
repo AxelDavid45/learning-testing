@@ -9,4 +9,10 @@ class CalculatorTest extends TestCase
         $calculator = new Calculator();
         $this->assertEquals(5, $calculator->sum(3, 2));
     }
+
+    public function test_asserts()
+    {
+        $this->assertClassHasAttribute('operator', Calculator::class);
+
+    }
 }
