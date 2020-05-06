@@ -4,6 +4,8 @@
 namespace App\ShoppingCart;
 
 
+use Cassandra\Exception\InvalidArgumentException;
+
 class Cart
 {
     private array $cart;
@@ -33,6 +35,15 @@ class Cart
     public function count(): int
     {
         return count($this->cart);
+    }
+
+    public function remove(string $id) : void
+    {
+        foreach ($this->cart as $index => $item) {
+            if ($item->id == $id) {
+                unset($this->cart[$index]);
+            }
+        }
     }
 
     public function isEmpty(): bool
