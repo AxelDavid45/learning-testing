@@ -24,9 +24,11 @@ class Connection
             $conn = new \PDO("mysql:host=localhost;dbname=learning-test", 'root', '');
             //Throws exceptions
             $conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            return $conn;
         } catch (\PDOException $e) {
             echo 'Connection error ' . $e->getMessage();
         }
+
     }
 
     public function createSchema() : void
@@ -36,7 +38,7 @@ class Connection
 
     public function dropTable() : void
     {
-        $stmt = "DROP TABLE IF EXISTS  carts";
+        $stmt = "DROP TABLE IF EXISTS carts";
         $this->conn->exec($stmt);
     }
 
@@ -47,15 +49,15 @@ class Connection
         //Create the query
         $query = "INSERT INTO carts VALUES ('{$cart->id}', '{$data}')";
         //Run the query
-        $this->conn->query($query);
+        $this->conn->exec($query);
     }
 
     public function retrieve(string $id)
     {
-        $query = "SELECT * FROM carts WHERE carts.id = {$id}";
+        $query = "SELECT * FROM carts WHERE carts.id = '{$id}'";
         $result = $this->conn->query($query);
 
-        return unserialize(base64_decode($result->fetch()));
+        return unserialize(base64_decode($result->fetch()['data']));
     }
 
 

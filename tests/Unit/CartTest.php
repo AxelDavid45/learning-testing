@@ -19,6 +19,7 @@ class CartTest extends TestCase
     {
         $this->cart = new Cart();
         $this->conn = new Connection();
+        $this->conn->createSchema();
     }
 
     /*
@@ -80,4 +81,12 @@ class CartTest extends TestCase
 
     }
 
+    public function test_insertIntoDB()
+    {
+        $this->conn->insert($this->cart);
+
+        $cart = $this->conn->retrieve($this->cart->id);
+
+        $this->assertEquals($this->cart->id, $cart->id);
+    }
 }
