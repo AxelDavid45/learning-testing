@@ -12,5 +12,8 @@
             "Tests\\": "tests"
         },
         "files": ["tests/Helpers/helpers.php"]
-    }
+    },
+  "require": {
+    "ext-pdo": "*"
+  }
 }

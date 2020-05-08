@@ -3,7 +3,7 @@
 
 namespace Unit;
 
-use PHPUnit\Framework\InvalidArgumentException;
+use App\Connection;
 use PHPUnit\Framework\TestCase;
 use App\ShoppingCart\{CartItem, Cart};
 
@@ -11,12 +11,14 @@ class CartTest extends TestCase
 {
 
     private Cart $cart;
-    /*
+    private Connection $conn;
+    /**
      * This method is called before each test.
      */
     protected function setUp(): void
     {
         $this->cart = new Cart();
+        $this->conn = new Connection();
     }
 
     /*
@@ -24,7 +26,7 @@ class CartTest extends TestCase
      */
     protected function tearDown(): void
     {
-        echo "Teardown\n";
+        $this->conn->dropTable();
     }
 
     public function test_canAddAnElement()
