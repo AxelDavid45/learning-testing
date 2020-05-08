@@ -21,7 +21,7 @@ class Connection
     {
         try {
             //Generate the connection
-            $conn = new \PDO("mysql:host=localhost;dbname=prueba", 'root', '');
+            $conn = new \PDO("mysql:host=localhost;dbname=learning-test", 'root', '');
             //Throws exceptions
             $conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         } catch (\PDOException $e) {
@@ -55,7 +55,7 @@ class Connection
         $query = "SELECT * FROM carts WHERE carts.id = {$id}";
         $result = $this->conn->query($query);
 
-        return base64_decode(unserialize($result->fetch()));
+        return unserialize(base64_decode($result->fetch()));
     }
 
 
