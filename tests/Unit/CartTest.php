@@ -4,6 +4,7 @@
 namespace Unit;
 
 use App\Connection;
+use App\Exceptions\EmptyCartException;
 use PHPUnit\Framework\TestCase;
 use App\ShoppingCart\{CartItem, Cart};
 
@@ -78,6 +79,17 @@ class CartTest extends TestCase
 
         $this->cart->remove('test');
         $this->assertFalse($this->cart->isEmpty());
+
+    }
+
+    public function test_EmptyCartException()
+    {
+        $this->expectException(EmptyCartException::class);
+        try {
+
+        } catch (EmptyCartException $e) {
+            $this->cart->getFirstItem();
+        }
 
     }
 

@@ -4,6 +4,7 @@
 namespace App\ShoppingCart;
 
 
+use App\Exceptions\EmptyCartException;
 use Cassandra\Exception\InvalidArgumentException;
 
 class Cart
@@ -29,7 +30,10 @@ class Cart
 
     public function getFirstItem(): CartItem
     {
-        return reset($this->cart);
+        $item = reset($this->cart);
+        if (!$item) {
+            throw new EmptyCartException("Item was not found, cart empty");
+        }
     }
 
     public function count(): int
@@ -37,7 +41,7 @@ class Cart
         return count($this->cart);
     }
 
-    public function remove(string $id) : void
+    public function remove(string $id): void
     {
         foreach ($this->cart as $index => $item) {
             if ($item->id == $id) {
