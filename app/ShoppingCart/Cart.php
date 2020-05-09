@@ -28,6 +28,10 @@ class Cart
         $this->cart = array_merge($this->cart, $items);
     }
 
+    /**
+     * @return CartItem
+     * @throws EmptyCartException
+     */
     public function getFirstItem(): CartItem
     {
         $item = reset($this->cart);
